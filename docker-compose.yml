@@ -2,6 +2,7 @@ version: '3.7'
 
 services:
   web:
+    container_name: "foodpolls-app"
     image: chrisshi/foodpolls:foodpolls-app
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -9,14 +10,14 @@ services:
     ports:
       - 8000:8000
     environment:
-      - SECRET_KEY='m4$$qoz*f=&s4kmxx(pmwza%hl(98&#ba230tz1%$*--n*ih24'
-      - YELP_API_KEY='RyKmXCOvvwxo_OpleHSkEShn5wPhKYcExoE_Kc2hRxOVHYOP3mM60WDwpyzG9msJHsYR30OLEUuNlZZ6qVhnlQmrZsrlLKUinCjN-r-1uLbKCWgJ7aaAA9RXqoxVWXYx' 
+      - SECRET_KEY=m4$$$$qoz*f=&s4kmxx(pmwza%hl(98&#ba230tz1%$$*--n*ih24
+      - YELP_API_KEY=RyKmXCOvvwxo_OpleHSkEShn5wPhKYcExoE_Kc2hRxOVHYOP3mM60WDwpyzG9msJHsYR30OLEUuNlZZ6qVhnlQmrZsrlLKUinCjN-r-1uLbKCWgJ7aaAA9RXqoxVWXYx
       - SQL_ENGINE=django.db.backends.postgresql
       - SQL_DATABASE=foodpolls
       - SQL_USER=django
       - SQL_PASSWORD=django
       - SQL_HOST=db
-      - SQL_PORT=5433
+      - SQL_PORT=5432
       - DATABASE=foodpolls
     depends_on:
       - db
@@ -29,3 +30,4 @@ services:
 
 volumes:
   postgres_data:
+  static_volume:
