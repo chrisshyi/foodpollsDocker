@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  web:
+    image: chrisshi/foodpolls:foodpolls-app
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+        - static_volume:/usr/src/app/staticfiles
+    ports:
+      - 8000:8000
+    environment:
+      - SECRET_KEY='m4$$qoz*f=&s4kmxx(pmwza%hl(98&#ba230tz1%$*--n*ih24'
+      - YELP_API_KEY='RyKmXCOvvwxo_OpleHSkEShn5wPhKYcExoE_Kc2hRxOVHYOP3mM60WDwpyzG9msJHsYR30OLEUuNlZZ6qVhnlQmrZsrlLKUinCjN-r-1uLbKCWgJ7aaAA9RXqoxVWXYx' 
+      - SQL_ENGINE=django.db.backends.postgresql
+      - SQL_DATABASE=foodpolls
+      - SQL_USER=django
+      - SQL_PASSWORD=django
+      - SQL_HOST=db
+      - SQL_PORT=5433
+      - DATABASE=foodpolls
+    depends_on:
+      - db
+  db:
+    image: chrisshi/foodpolls:foodpolls-db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
